@@ -1,0 +1,40 @@
+﻿@model YapiMalzemeleriOdev.ViewModels.KategoriFormViewModels
+@{
+    ViewBag.Title = "UrunlerForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>UrunlerForm</h2>
+@using (Html.BeginForm("Kaydet", "Urunler", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(m => m.urunler.urun_ad, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.urunler.urun_ad)
+        @Html.ValidationMessageFor(m=>m.urunler.urun_ad)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.urunler.urun_adet, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.urunler.urun_adet)
+        @Html.ValidationMessageFor(m => m.urunler.urun_adet)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.urunler.kategori_id, "Kategori", new { @class = "form-control" })
+        @Html.DropDownListFor(m => m.urunler.kategori_id, new SelectList(Model.Kategoriler, "kategori_id", "kategori_ad"), "Kategori Seçiniz", new { @class = "form-control" }))
+        @Html.ValidationMessageFor(m => m.urunler.kategori_id)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.urunler.urun_fiyat, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.urunler.urun_fiyat)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.urunler.garanti_suresi, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.urunler.garanti_suresi)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.urunler.urun_guc, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.urunler.urun_guc)
+    </div>
+    @Html.HiddenFor(m=>m.urunler.urun_id)
+    <button type="submit" class="btn btn-dark">Kaydet</button>
+}

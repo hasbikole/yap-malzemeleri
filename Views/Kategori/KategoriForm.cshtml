@@ -1,0 +1,19 @@
+﻿@model YapiMalzemeleriOdev.Models.EntityFramework.Kategori
+
+@{
+    ViewBag.Title = "Yeni";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("Kaydet", "Kategori", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(m => m.Kategori_ad, "Kategori Adı")
+        @Html.TextBoxFor(m => m.Kategori_ad, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m=>m.Kategori_ad)
+    </div>
+    @Html.HiddenFor(m => m.Kategori_id)
+    <button type="submit" class="btn btn-success">Kaydet</button>
+}

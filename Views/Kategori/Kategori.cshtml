@@ -1,0 +1,36 @@
+﻿@using YapiMalzemeleriOdev.Models.EntityFramework;
+@model List<Kategori>
+@{
+    ViewBag.Title = "Kategori";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a class="btn btn-success" href="/Kategori/Yeni/">Yeni Kategori</a>
+<h2>Kategori</h2>
+@using (Html.BeginForm())
+{
+    <label>Kategori adı ara</label>
+    @Html.Editor("ara")
+    <input type="submit" value="Ara" />
+}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Ad</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Kategori kategori in Model)
+        {
+            <tr>
+                <td>@kategori.Kategori_id</td>
+                <td>@kategori.Kategori_ad</td>
+                <td><a class="btn btn-primary" href="/Kategori/Guncelle/@kategori.Kategori_id">Guncelle</a></td>
+                <td><a class="btn btn-warning" href="/Kategori/Sil/@kategori.Kategori_id">Sil</a></td>
+            </tr>
+        }
+
+    </tbody>
+</table>

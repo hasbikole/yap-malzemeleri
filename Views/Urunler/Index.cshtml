@@ -1,0 +1,44 @@
+﻿@model List<YapiMalzemeleriOdev.Models.EntityFramework.Urunler>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.ActionLink("Yeni Urun", "Yeni", null, new { @class = "btn btn-success" })
+<h2>Ürün Listesi</h2>
+@using (Html.BeginForm())
+{
+    <label>Ürün adı ara</label>
+    @Html.Editor("ara")
+    <input type="submit" value="Ara" />
+}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Urun ID</th>
+            <th>Kategori</th>
+            <th>Urun Adı</th>
+            <th>Urun Adedi</th>
+            <th>Urun Fiyatı</th>
+            <th>Garanti Süresi</th>
+            <th>Urun Gücü</th>
+            <th>Guncelle</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Urunler in Model)
+        {
+            <tr>
+                <td>@Urunler.urun_id</td>
+                <td>@Urunler.Kategori.Kategori_ad</td>
+                <td>@Urunler.urun_ad</td>
+                <td>@Urunler.urun_adet</td>
+                <td>@Urunler.urun_fiyat</td>
+                <td>@Urunler.garanti_suresi</td>
+                <td>@Urunler.urun_guc</td>
+                <td>@Html.ActionLink("Guncelle", "Guncelle", new { id = Urunler.urun_id }, new { @class = "btn btn-success" })</td>
+                <td>@Html.ActionLink("Sil", "Sil", new { id = Urunler.urun_id }, new { @class = "btn btn-danger" })</td>
+            </tr>
+        }
+    </tbody>
+</table>
