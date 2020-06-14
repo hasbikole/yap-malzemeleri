@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="YapimalzemeleriModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Kategori">
+    <Key>
+      <PropertyRef Name="Kategori_id" />
+    </Key>
+    <Property Name="Kategori_id" Type="smallint" Nullable="false" />
+    <Property Name="Kategori_ad" Type="nvarchar(max)" />
+    <Property Name="Kategori_tanim" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Urunler">
+    <Key>
+      <PropertyRef Name="urun_id" />
+    </Key>
+    <Property Name="urun_id" Type="smallint" Nullable="false" />
+    <Property Name="kategori_id" Type="smallint" />
+    <Property Name="urun_ad" Type="nvarchar(max)" />
+    <Property Name="urun_adet" Type="smallint" />
+    <Property Name="urun_fiyat" Type="smallint" />
+    <Property Name="garanti_suresi" Type="smallint" />
+    <Property Name="urun_guc" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ad" Type="varchar" MaxLength="50" />
+    <Property Name="Soyad" Type="varchar" MaxLength="50" />
+    <Property Name="Eposta" Type="varchar" MaxLength="100" />
+    <Property Name="Sifre" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <Association Name="FK_Kategori_Kategori">
+    <End Role="Kategori" Type="Self.Kategori" Multiplicity="1" />
+    <End Role="Kategori1" Type="Self.Kategori" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Kategori">
+        <PropertyRef Name="Kategori_id" />
+      </Principal>
+      <Dependent Role="Kategori1">
+        <PropertyRef Name="Kategori_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Urunler_Kategori">
+    <End Role="Urunler" Type="Self.Urunler" Multiplicity="1" />
+    <End Role="Urunler1" Type="Self.Urunler" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Urunler">
+        <PropertyRef Name="urun_id" />
+      </Principal>
+      <Dependent Role="Urunler1">
+        <PropertyRef Name="urun_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="YapimalzemeleriModelStoreContainer">
+    <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Urunler" EntityType="Self.Urunler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Kategori_Kategori" Association="Self.FK_Kategori_Kategori">
+      <End Role="Kategori" EntitySet="Kategori" />
+      <End Role="Kategori1" EntitySet="Kategori" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Urunler_Kategori" Association="Self.FK_Urunler_Kategori">
+      <End Role="Urunler" EntitySet="Urunler" />
+      <End Role="Urunler1" EntitySet="Urunler" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

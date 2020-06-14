@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="YapimalzemeleriModelStoreContainer" CdmEntityContainer="YapimalzemeleriEntities">
+    <EntitySetMapping Name="Kategori">
+      <EntityTypeMapping TypeName="YapimalzemeleriModel.Kategori">
+        <MappingFragment StoreEntitySet="Kategori">
+          <ScalarProperty Name="Kategori_id" ColumnName="Kategori_id" />
+          <ScalarProperty Name="Kategori_ad" ColumnName="Kategori_ad" />
+          <ScalarProperty Name="Kategori_tanim" ColumnName="Kategori_tanim" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Urunler">
+      <EntityTypeMapping TypeName="YapimalzemeleriModel.Urunler">
+        <MappingFragment StoreEntitySet="Urunler">
+          <ScalarProperty Name="urun_id" ColumnName="urun_id" />
+          <ScalarProperty Name="kategori_id" ColumnName="kategori_id" />
+          <ScalarProperty Name="urun_ad" ColumnName="urun_ad" />
+          <ScalarProperty Name="urun_adet" ColumnName="urun_adet" />
+          <ScalarProperty Name="urun_fiyat" ColumnName="urun_fiyat" />
+          <ScalarProperty Name="garanti_suresi" ColumnName="garanti_suresi" />
+          <ScalarProperty Name="urun_guc" ColumnName="urun_guc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="YapimalzemeleriModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Ad" ColumnName="Ad" />
+          <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+          <ScalarProperty Name="Eposta" ColumnName="Eposta" />
+          <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

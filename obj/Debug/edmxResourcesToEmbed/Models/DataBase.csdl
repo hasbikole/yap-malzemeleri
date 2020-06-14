@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="YapimalzemeleriModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Kategori">
+    <Key>
+      <PropertyRef Name="Kategori_id" />
+    </Key>
+    <Property Name="Kategori_id" Type="Int16" Nullable="false" />
+    <Property Name="Kategori_ad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Kategori_tanim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Kategori1" Relationship="Self.FK_Kategori_Kategori" FromRole="Kategori" ToRole="Kategori1" />
+    <NavigationProperty Name="Kategori2" Relationship="Self.FK_Kategori_Kategori" FromRole="Kategori1" ToRole="Kategori" />
+  </EntityType>
+  <EntityType Name="Urunler">
+    <Key>
+      <PropertyRef Name="urun_id" />
+    </Key>
+    <Property Name="urun_id" Type="Int16" Nullable="false" />
+    <Property Name="kategori_id" Type="Int16" />
+    <Property Name="urun_ad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="urun_adet" Type="Int16" />
+    <Property Name="urun_fiyat" Type="Int16" />
+    <Property Name="garanti_suresi" Type="Int16" />
+    <Property Name="urun_guc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Urunler1" Relationship="Self.FK_Urunler_Kategori" FromRole="Urunler" ToRole="Urunler1" />
+    <NavigationProperty Name="Urunler2" Relationship="Self.FK_Urunler_Kategori" FromRole="Urunler1" ToRole="Urunler" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Eposta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Sifre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_Kategori_Kategori">
+    <End Role="Kategori" Type="Self.Kategori" Multiplicity="1" />
+    <End Role="Kategori1" Type="Self.Kategori" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Kategori">
+        <PropertyRef Name="Kategori_id" />
+      </Principal>
+      <Dependent Role="Kategori1">
+        <PropertyRef Name="Kategori_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Urunler_Kategori">
+    <End Role="Urunler" Type="Self.Urunler" Multiplicity="1" />
+    <End Role="Urunler1" Type="Self.Urunler" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Urunler">
+        <PropertyRef Name="urun_id" />
+      </Principal>
+      <Dependent Role="Urunler1">
+        <PropertyRef Name="urun_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="YapimalzemeleriEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Kategori" EntityType="Self.Kategori" />
+    <EntitySet Name="Urunler" EntityType="Self.Urunler" />
+    <EntitySet Name="User" EntityType="Self.User" />
+    <AssociationSet Name="FK_Kategori_Kategori" Association="Self.FK_Kategori_Kategori">
+      <End Role="Kategori" EntitySet="Kategori" />
+      <End Role="Kategori1" EntitySet="Kategori" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Urunler_Kategori" Association="Self.FK_Urunler_Kategori">
+      <End Role="Urunler" EntitySet="Urunler" />
+      <End Role="Urunler1" EntitySet="Urunler" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
